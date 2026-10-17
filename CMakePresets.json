@@ -1,0 +1,88 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "linux-base",
+      "hidden": true,
+      "inherits": "base",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-20",
+        "CMAKE_CXX_COMPILER": "clang++-20"
+      }
+    },
+    {
+      "name": "linux-debug",
+      "inherits": "linux-base",
+      "displayName": "Linux Debug（ASan + UBSan）",
+      "description": "开发默认构建，带地址与未定义行为检查",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "TXU_WARNINGS_AS_ERRORS": "ON",
+        "TXU_ENABLE_SANITIZERS": "ON"
+      }
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "inherits": "linux-base",
+      "displayName": "Linux RelWithDebInfo",
+      "description": "性能数字与帧预算测量只从这一份构建取",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "linux-release",
+      "inherits": "linux-base",
+      "displayName": "Linux Release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "TXU_BUILD_TESTS": "OFF"
+      }
+    },
+    {
+      "name": "windows-msvc",
+      "inherits": "base",
+      "displayName": "Windows MSVC（骨架，未验证）",
+      "description": "骨架，未验证",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/windows-msvc.cmake"
+    },
+    {
+      "name": "android-arm64",
+      "inherits": "base",
+      "displayName": "Android arm64（骨架，未验证）",
+      "description": "骨架，未验证",
+      "toolchainFile": "${sourceDir}/cmake/toolchains/android-arm64.cmake"
+    }
+  ],
+  "buildPresets": [
+    { "name": "linux-debug", "configurePreset": "linux-debug" },
+    { "name": "linux-relwithdebinfo", "configurePreset": "linux-relwithdebinfo" },
+    { "name": "linux-release", "configurePreset": "linux-release" }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux-debug",
+      "output": { "outputOnFailure": true }
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "configurePreset": "linux-relwithdebinfo",
+      "output": { "outputOnFailure": true }
+    }
+  ]
+}

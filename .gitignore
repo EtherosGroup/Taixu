@@ -1,0 +1,10 @@
+# 构建产物
+/build/
+build/
+.cache/
+.idea/
+
+# 工具输出
+compile_commands.json
+.vscode/
+/cmake-build-debug/
