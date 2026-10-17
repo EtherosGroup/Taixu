@@ -1,0 +1,70 @@
+---
+# Taixu C++ 代码风格
+#
+# 基准：CLion / IntelliJ IDEA 默认 C++ 代码风格（Project scheme，未做任何自定义）
+# 参考文件：engine/core/include/taixu/core/math/aabb.hpp（由 IDEA 格式化器产出，用于校验本配置）
+#
+# clang-format 无法逐字节复刻 IDEA 格式化器，已知差异：
+#   1) IDEA 保留代码中已有的换行位置；clang-format 是规范化器，会重新计算所有换行
+#   2) IDEA 把嵌套初始化列表排成块状；Cpp11BracedListStyle 只有「紧凑且花括号内无空格」
+#      与「块状但花括号内带空格」两种，无法表达 IDEA 的形态
+#
+# 警告：不要对 CMakeLists.txt / *.cmake 运行 clang-format。
+#   clang-format 没有 CMake 语言支持，会把 .txt 当作 C++ 处理并静默改坏文件：
+#   `src/version.cpp` 会变成 `src / version.cpp`，缩进逐级漂移，且退出码为 0。
+#   CMake 文件目前不受任何格式化工具管辖；如需纳入，用 gersemi 或 cmake-format。
+#   命令行与 CI 里请按扩展名限定范围，只传 .hpp/.cpp/.h/.cc。
+#
+# 仅 C++ 配置，语言由 Language 键限定
+Language: Cpp
+BasedOnStyle: LLVM
+
+# 缩进：4 空格，不用 Tab；命名空间内容与访问修饰符各缩进一层
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+NamespaceIndentation: All
+AccessModifierOffset: -4
+
+# 行宽：与 IDEA 默认右边距一致
+ColumnLimit: 120
+
+# 花括号一律换行（Allman）
+BreakBeforeBraces: Allman
+
+# 短语句：单行函数体与单语句 if 保留在同一行
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortBlocksOnASingleLine: Never
+
+# 换行后按 ContinuationIndentWidth 缩进，不做操作数对齐
+AlignOperands: DontAlign
+
+# 指针与引用贴类型
+PointerAlignment: Left
+DerivePointerAlignment: false
+
+# 括号与空格
+SpaceBeforeParens: ControlStatements
+
+# 空行
+MaxEmptyLinesToKeep: 1
+
+# 注释不重排，中文注释按原样保留
+ReflowComments: false
+
+# include：保持分组，组内排序
+SortIncludes: CaseSensitive
+IncludeBlocks: Preserve
+
+# 命名空间收尾注释补全名字
+FixNamespaceComments: true
+---
+# JSON：CMakePresets.json 等构建描述文件
+#
+# clang-format 的 JSON 格式化器会把内联对象展开成多行，没有开关可以关闭，
+# 因此对已手写排版的 CMakePresets.json 会产生改动（JSON 语义等价）。
+Language: Json
+BasedOnStyle: LLVM
+IndentWidth: 2
