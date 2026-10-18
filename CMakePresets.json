@@ -69,20 +69,33 @@
     }
   ],
   "buildPresets": [
-    { "name": "linux-debug", "configurePreset": "linux-debug" },
-    { "name": "linux-relwithdebinfo", "configurePreset": "linux-relwithdebinfo" },
-    { "name": "linux-release", "configurePreset": "linux-release" }
+    {
+      "name": "linux-debug",
+      "configurePreset": "linux-debug"
+    },
+    {
+      "name": "linux-relwithdebinfo",
+      "configurePreset": "linux-relwithdebinfo"
+    },
+    {
+      "name": "linux-release",
+      "configurePreset": "linux-release"
+    }
   ],
   "testPresets": [
     {
       "name": "linux-debug",
       "configurePreset": "linux-debug",
-      "output": { "outputOnFailure": true }
+      "output": {
+        "outputOnFailure": true
+      }
     },
     {
       "name": "linux-relwithdebinfo",
       "configurePreset": "linux-relwithdebinfo",
-      "output": { "outputOnFailure": true }
+      "output": {
+        "outputOnFailure": true
+      }
     }
   ]
 }
