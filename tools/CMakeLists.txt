@@ -9,3 +9,8 @@ add_executable(txu_vk_probe
     vk_probe/main.cpp)
 
 target_link_libraries(txu_vk_probe PRIVATE taixu_vulkan taixu_compile_options)
+
+add_executable(txu_vk_clear
+    vk_clear/main.cpp)
+
+target_link_libraries(txu_vk_clear PRIVATE taixu_vulkan SDL3::SDL3 taixu_compile_options)

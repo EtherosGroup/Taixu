@@ -42,7 +42,7 @@ int main() {
     volkLoadInstance(instance);
 
     vkb::PhysicalDeviceSelector selector{instance};
-    // 还没有 surface（窗口在 Task D 才接入），先跳过与显示相关的选择条件
+    // 还没有 surface，先跳过与显示相关的选择条件
     auto physical_ret = selector.defer_surface_initialization()
                             .prefer_gpu_device_type(vkb::PreferredDeviceType::discrete)
                             .select();
