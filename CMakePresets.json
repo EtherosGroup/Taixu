@@ -11,6 +11,7 @@
       "hidden": true,
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
@@ -21,7 +22,8 @@
       "inherits": "base",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang-20",
-        "CMAKE_CXX_COMPILER": "clang++-20"
+        "CMAKE_CXX_COMPILER": "clang++-20",
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
       }
     },
     {
@@ -58,14 +60,20 @@
       "inherits": "base",
       "displayName": "Windows MSVC（骨架，未验证）",
       "description": "骨架，未验证",
-      "toolchainFile": "${sourceDir}/cmake/toolchains/windows-msvc.cmake"
+      "toolchainFile": "${sourceDir}/cmake/toolchains/windows-msvc.cmake",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows"
+      }
     },
     {
       "name": "android-arm64",
       "inherits": "base",
       "displayName": "Android arm64（骨架，未验证）",
       "description": "骨架，未验证",
-      "toolchainFile": "${sourceDir}/cmake/toolchains/android-arm64.cmake"
+      "toolchainFile": "${sourceDir}/cmake/toolchains/android-arm64.cmake",
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "arm64-android"
+      }
     }
   ],
   "buildPresets": [

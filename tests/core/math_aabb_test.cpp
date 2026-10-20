@@ -27,11 +27,11 @@ TEST_CASE("射线错过包围盒")
     float t_max = 0.0f;
 
     // 侧面擦过
-    CHECK_FALSE(intersect(Ray{{2.0f, 0.0f, 5.0f}, {0.0f, 0.0f, -1.0f}}, kUnitBox, t_min, t_max));
+    CHECK_FALSE(intersect(Ray{.origin = {2.0f, 0.0f, 5.0f}, .direction = {.x = 0.0f, .y = 0.0f, .z = -1.0f}}, kUnitBox, t_min, t_max));
     // 平行且落在 slab 外
-    CHECK_FALSE(intersect(Ray{{0.0f, 5.0f, 0.0f}, {1.0f, 0.0f, 0.0f}}, kUnitBox, t_min, t_max));
+    CHECK_FALSE(intersect(Ray{.origin = {0.0f, 5.0f, 0.0f}, .direction = {.x = 1.0f, .y = 0.0f, .z = 0.0f}}, kUnitBox, t_min, t_max));
     // 盒在射线起点之后
-    CHECK_FALSE(intersect(Ray{{5.0f, 0.0f, 0.0f}, {1.0f, 0.0f, 0.0f}}, kUnitBox, t_min, t_max));
+    CHECK_FALSE(intersect(Ray{.origin = {5.0f, 0.0f, 0.0f}, .direction = {.x = 1.0f, .y = 0.0f, .z = 0.0f}}, kUnitBox, t_min, t_max));
 }
 
 TEST_CASE("射线起点在盒内")

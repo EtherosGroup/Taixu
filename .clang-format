@@ -52,7 +52,7 @@ SpaceBeforeParens: ControlStatements
 MaxEmptyLinesToKeep: 1
 
 # 注释不重排，中文注释按原样保留
-ReflowComments: false
+ReflowComments: Never
 
 # include：保持分组，组内排序
 SortIncludes: CaseSensitive

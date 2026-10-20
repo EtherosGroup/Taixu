@@ -1,0 +1,10 @@
+# LeakSanitizer 抑制规则
+#
+# 第三方库在初始化/退出路径上未释放的内存，不属于本项目责任。
+# 用法：LSAN_OPTIONS=suppressions=<repo>/cmake/lsan.supp
+# （run_on_cibocaz.sh 已经设好）
+
+# NVIDIA 驱动在 Vulkan 初始化时经 libdbus 注册会话总线，退出时未释放
+# 实测：探针正确销毁 instance 后仍有约 2.2 KB 泄漏，调用栈全部落在
+# libdbus-1 与 <unknown module>（驱动）内
+leak:libdbus-1

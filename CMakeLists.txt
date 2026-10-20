@@ -43,7 +43,11 @@ if(TXU_ENABLE_SANITIZERS)
     add_link_options(-fsanitize=address,undefined)
 endif()
 
+# Vulkan 依赖（volk / vk-bootstrap / VMA），见 cmake/TaixuDependencies.cmake
+include(cmake/TaixuDependencies.cmake)
+
 add_subdirectory(engine)
+add_subdirectory(tools)
 
 if(TXU_BUILD_TESTS)
     enable_testing()

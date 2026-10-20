@@ -4,8 +4,15 @@ build/
 .cache/
 .idea/
 
+# 依赖（vcpkg 清单模式安装在构建目录，这里兜底）
+/vcpkg_installed/
+
 # 工具输出
 compile_commands.json
 .vscode/
 /cmake-build-debug/
 /learning/
+
+# 本机专用脚本（写死本机路径，不入库）
+/build_on_cibocaz.sh
+/run_on_cibocaz.sh
